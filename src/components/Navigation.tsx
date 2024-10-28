@@ -1,34 +1,13 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from '@headlessui/react';
 import { FaBars, FaTimes, FaHome, FaEnvelope, FaStar } from 'react-icons/fa';
-
-const iconClassName = 'h-5 w-5';
-const linkClassName =
-  'text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium';
-
-interface NavigationLinkProps {
-  href: string;
-  icon: React.ComponentType<{ className: string }>;
-  children: React.ReactNode;
-}
-
-const NavigationLink: React.FC<NavigationLinkProps> = ({
-  href,
-  icon: Icon,
-  children,
-}) => (
-  <Link href={href} className={`flex items-center gap-2 ${linkClassName}`}>
-    <Icon className={iconClassName} />
-    {children}
-  </Link>
-);
+import NavigationLink from './NavigationLink';
 
 export default function Navigation() {
   const navigationItems = [
