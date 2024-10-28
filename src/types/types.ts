@@ -19,3 +19,13 @@ export interface FooterConfig {
   social?: SocialLink[];
   legal?: { href: string; text: string }[];
 }
+
+export type NavItem = {
+  href: string;
+  text: string;
+  type: 'home' | 'envelope' | 'star'; // Add other types as needed
+};
+
+export interface NavigationConfig {
+  items: NavItem[];
+}

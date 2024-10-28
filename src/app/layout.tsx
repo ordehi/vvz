@@ -3,7 +3,8 @@ import localFont from 'next/font/local';
 import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { footerConfig } from '@/config/components/footerConfig.server';
+import { footerConfig } from '@/config/components/footer.server';
+import { navigationConfig } from '@/config/components/navigation.server';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -31,7 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navigation />
+        <Navigation navigationConfig={navigationConfig} />
         {children}
         <Footer footerConfig={footerConfig} />
       </body>

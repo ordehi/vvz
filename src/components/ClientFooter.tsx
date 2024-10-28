@@ -2,7 +2,7 @@
 
 import React from 'react';
 import FooterLink from './FooterLink';
-import { clientIcons } from '@/config/components/footerConfig.client';
+import { clientIcons } from '@/config/components/footer.client';
 import { FooterConfig } from '../types/types';
 
 interface ClientFooterProps {
