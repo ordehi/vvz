@@ -3,21 +3,20 @@ import Link from 'next/link';
 
 interface FooterLinkProps {
   href: string;
-  icon: React.ComponentType<{ className: string }>;
   children: React.ReactNode;
+  className?: string;
 }
 
 export default function FooterLink({
   href,
-  icon: Icon,
   children,
+  className = '',
 }: FooterLinkProps) {
   return (
     <Link
       href={href}
-      className='flex items-center gap-2 text-gray-300 hover:text-white'
+      className={`hover:text-gray-300 transition-colors duration-200 ${className}`}
     >
-      <Icon className='w-5 h-5' />
       {children}
     </Link>
   );

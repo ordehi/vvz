@@ -4,6 +4,7 @@ interface NavigationLinkProps {
   href: string;
   icon: React.ComponentType<{ className: string }>;
   children: React.ReactNode;
+  className?: string;
 }
 
 export default function NavigationLink({
