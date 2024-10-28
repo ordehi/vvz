@@ -1,7 +1,31 @@
-import { FooterConfig } from '../types/types';
+'use client';
+
+import React from 'react';
 import Image from 'next/image';
+import { MdEmail, MdPhone, MdLocationOn } from 'react-icons/md';
 import FooterLink from './FooterLink';
-import ClientFooter from './ClientFooter';
+
+type SocialLink = {
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ size: number }>;
+};
+
+interface FooterConfig {
+  company?: {
+    logo?: string;
+    description?: string;
+    name?: string;
+  };
+  quickLinks?: { href: string; text: string }[];
+  contact?: {
+    email?: string;
+    phone?: string;
+    address?: string;
+  };
+  social?: SocialLink[];
+  legal?: { href: string; text: string }[];
+}
 
 export default function Footer({
   footerConfig,
@@ -10,6 +34,7 @@ export default function Footer({
 }) {
   const currentYear = new Date().getFullYear();
 
+  // Calculate the number of sections to determine grid columns
   function getSectionCount() {
     let count = 0;
     if (footerConfig?.company) count++;
@@ -19,6 +44,7 @@ export default function Footer({
     return count;
   }
 
+  // Get grid columns class based on section count
   function getGridClass() {
     const count = getSectionCount();
     switch (count) {
@@ -69,8 +95,57 @@ export default function Footer({
             </div>
           )}
 
-          {/* Render client-side components */}
-          <ClientFooter footerConfig={footerConfig} />
+          {/* Contact Info */}
+          {footerConfig?.contact && (
+            <div>
+              <h3 className='text-white font-semibold mb-4'>Contact Us</h3>
+              <ul className='space-y-2'>
+                {footerConfig.contact.email && (
+                  <li className='flex items-center gap-2'>
+                    <MdEmail size={16} />
+                    <FooterLink href={`mailto:${footerConfig.contact.email}`}>
+                      {footerConfig.contact.email}
+                    </FooterLink>
+                  </li>
+                )}
+                {footerConfig.contact.phone && (
+                  <li className='flex items-center gap-2'>
+                    <MdPhone size={16} />
+                    <FooterLink href={`tel:${footerConfig.contact.phone}`}>
+                      {footerConfig.contact.phone}
+                    </FooterLink>
+                  </li>
+                )}
+                {footerConfig.contact.address && (
+                  <li className='flex items-center gap-2'>
+                    <MdLocationOn size={16} />
+                    <span className='text-sm'>
+                      {footerConfig.contact.address}
+                    </span>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
+
+          {/* Social Links */}
+          {(footerConfig?.social?.length ?? 0) > 0 && (
+            <div>
+              <h3 className='text-white font-semibold mb-4'>Follow Us</h3>
+              <div className='flex gap-4'>
+                {footerConfig.social?.map((social: SocialLink) => (
+                  <FooterLink
+                    key={social.href}
+                    href={social.href}
+                    className='hover:text-white'
+                    aria-label={social.label}
+                  >
+                    <social.icon size={20} />
+                  </FooterLink>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
