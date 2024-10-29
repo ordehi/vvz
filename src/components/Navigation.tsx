@@ -11,7 +11,7 @@ export default function Navigation({
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex-grow-0 text-lg font-bold whitespace-nowrap'>
-            My Business Card
+            Smart Analytics
           </div>
 
           {/* Render client-side component for interactive elements */}
