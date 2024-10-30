@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ContactFormConfig, FieldType } from '@/types/types';
+import { ContactFormConfig } from '@/types/types';
 
 export const createValidationSchema = (config: ContactFormConfig) => {
   const schemaFields: { [key: string]: z.ZodType<any> } = {};
@@ -39,18 +39,10 @@ export const createValidationSchema = (config: ContactFormConfig) => {
       default:
         fieldSchema = z.string();
         if (field.validation?.min !== undefined) {
-          fieldSchema = fieldSchema.min(
-            field.validation.min,
-            field.validation?.message ||
-              `Must be at least ${field.validation.min} characters`
-          );
+          fieldSchema = fieldSchema.min(field.validation.min);
         }
         if (field.validation?.max !== undefined) {
-          fieldSchema = fieldSchema.max(
-            field.validation.max,
-            field.validation?.message ||
-              `Must be at most ${field.validation.max} characters`
-          );
+          fieldSchema = fieldSchema.max(field.validation.max);
         }
         if (field.validation?.pattern) {
           fieldSchema = fieldSchema.regex(

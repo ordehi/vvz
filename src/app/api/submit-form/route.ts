@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { createValidationSchema } from '@/lib/validation';
 import { prisma } from '@/lib/prisma';
 import { sendEmail } from '@/lib/email';
-import { ContactFormConfig } from '@/types/types';
+import { z } from 'zod';
 
 export async function POST(request: Request) {
   try {
@@ -14,10 +14,13 @@ export async function POST(request: Request) {
     // Validate the request body
     const validatedData = validationSchema.parse(formData);
 
-    // Store in database - create dynamic data object
+    // Store in database with both specific fields and complete data
     const submission = await prisma.contactSubmission.create({
       data: {
-        ...validatedData,
+        name: validatedData.name as string,
+        email: validatedData.email as string,
+        message: validatedData.message as string,
+        data: validatedData, // Store complete form data as JSON
         status: 'PENDING',
       },
     });
@@ -28,11 +31,13 @@ export async function POST(request: Request) {
       .join('\n');
 
     // Send email notification
-    await sendEmail({
-      to: process.env.ADMIN_EMAIL!,
-      subject: 'New Contact Form Submission',
-      text: emailContent,
-    });
+    if (process.env.ADMIN_EMAIL) {
+      await sendEmail({
+        to: process.env.ADMIN_EMAIL,
+        subject: 'New Contact Form Submission',
+        text: emailContent,
+      });
+    }
 
     return NextResponse.json(
       { message: 'Form submitted successfully', id: submission.id },
