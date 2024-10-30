@@ -1,9 +1,34 @@
-'use client';
-
 import React from 'react';
-import FooterLink from './FooterLink';
-import { clientIcons } from '@/config/components/footer.client';
-import { FooterConfig } from '../types/types';
+import Link from 'next/link';
+import { FooterConfig, FooterLinkProps } from '../types/types';
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaInstagram,
+} from 'react-icons/fa';
+import { MdEmail, MdPhone, MdLocationOn } from 'react-icons/md';
+
+export const socialIcons = {
+  facebook: FaFacebookF,
+  twitter: FaTwitter,
+  linkedin: FaLinkedinIn,
+  instagram: FaInstagram,
+  email: MdEmail,
+  phone: MdPhone,
+  location: MdLocationOn,
+};
+
+function FooterLink({ href, children, className = '' }: FooterLinkProps) {
+  return (
+    <Link
+      href={href}
+      className={`hover:text-gray-300 transition-colors duration-200 ${className}`}
+    >
+      {children}
+    </Link>
+  );
+}
 
 interface ClientFooterProps {
   footerConfig: FooterConfig;
@@ -19,7 +44,7 @@ export default function ClientFooter({ footerConfig }: ClientFooterProps) {
           <ul className='space-y-2'>
             {footerConfig.contact.email && (
               <li className='flex items-center gap-2'>
-                <clientIcons.MdEmail size={16} />
+                <MdEmail size={16} />
                 <FooterLink href={`mailto:${footerConfig.contact.email}`}>
                   {footerConfig.contact.email}
                 </FooterLink>
@@ -27,7 +52,7 @@ export default function ClientFooter({ footerConfig }: ClientFooterProps) {
             )}
             {footerConfig.contact.phone && (
               <li className='flex items-center gap-2'>
-                <clientIcons.MdPhone size={16} />
+                <MdPhone size={16} />
                 <FooterLink href={`tel:${footerConfig.contact.phone}`}>
                   {footerConfig.contact.phone}
                 </FooterLink>
@@ -35,7 +60,7 @@ export default function ClientFooter({ footerConfig }: ClientFooterProps) {
             )}
             {footerConfig.contact.address && (
               <li className='flex items-center gap-2'>
-                <clientIcons.MdLocationOn size={16} />
+                <MdLocationOn size={16} />
                 <span className='text-sm'>{footerConfig.contact.address}</span>
               </li>
             )}
@@ -50,11 +75,11 @@ export default function ClientFooter({ footerConfig }: ClientFooterProps) {
           <div className='flex gap-4'>
             {footerConfig.social?.map(
               (social: {
-                type: keyof typeof clientIcons;
+                type: keyof typeof socialIcons;
                 href: string;
                 label: string;
               }) => {
-                const Icon = clientIcons[social.type];
+                const Icon = socialIcons[social.type];
                 return (
                   <FooterLink
                     key={social.href}

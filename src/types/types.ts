@@ -20,6 +20,12 @@ export interface FooterConfig {
   legal?: { href: string; text: string }[];
 }
 
+export interface FooterLinkProps {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}
+
 export type NavItem = {
   href: string;
   text: string;
@@ -28,4 +34,27 @@ export type NavItem = {
 
 export interface NavigationConfig {
   items: NavItem[];
+}
+
+export interface CompanyInfoProps {
+  company?: FooterConfig['company'];
+}
+
+export interface QuickLinksProps {
+  quickLinks?: FooterConfig['quickLinks'];
+}
+
+export interface ContactInfoProps {
+  contact?: FooterConfig['contact'];
+}
+
+export interface SocialLinksProps {
+  social?: FooterConfig['social'];
+}
+
+export interface NavigationLinkProps {
+  href: string;
+  icon: React.ComponentType<{ className: string }>;
+  children: React.ReactNode;
+  className?: string;
 }
