@@ -69,3 +69,18 @@ export interface ButtonProps
   'data-dark'?: boolean;
   'aria-theme'?: string;
 }
+
+export interface ContactFormConfig {
+  title: string;
+  description?: string;
+  fields: {
+    name: string;
+    type: 'text' | 'email' | 'textarea';
+    placeholder?: string;
+    required?: boolean;
+  }[];
+  submitButton: {
+    text: string;
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  };
+}
