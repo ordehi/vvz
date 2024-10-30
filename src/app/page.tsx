@@ -49,7 +49,12 @@ export default function Home() {
 
         {/* Contact Section */}
         <div className='flex flex-col sm:flex-row gap-4 mt-8'>
-          <Button variant='secondary' size='md' icon={<FiPhone />}>
+          <Button
+            variant='secondary'
+            size='md'
+            icon={<FiPhone />}
+            href='/contact'
+          >
             Schedule a Call
           </Button>
           <Button variant='secondary' size='md' icon={<FiMail />}>

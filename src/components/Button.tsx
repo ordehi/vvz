@@ -1,4 +1,5 @@
 import React from 'react';
+import Link, { LinkProps } from 'next/link';
 import { ButtonProps } from '@/types/types';
 
 const baseStyles =
@@ -62,6 +63,10 @@ export default function Button({
   icon,
   fullWidth = false,
   disabled,
+  actionType = 'button',
+  href,
+  target,
+  rel,
   ...props
 }: ButtonProps) {
   const isDarkMode =
@@ -81,11 +86,41 @@ export default function Button({
     .filter(Boolean)
     .join(' ');
 
-  return (
-    <button className={classes} disabled={disabled || isLoading} {...props}>
+  const content = (
+    <>
       {isLoading && <LoadingSpinner />}
       {icon && !isLoading && <span className='mr-2'>{icon}</span>}
       {children}
+    </>
+  );
+
+  // If href is provided, render as Link
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={classes}
+        target={target}
+        rel={target === '_blank' ? 'noopener noreferrer' : rel}
+        {...(props as Omit<
+          React.AnchorHTMLAttributes<HTMLAnchorElement>,
+          keyof LinkProps
+        >)}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  // Otherwise render as button
+  return (
+    <button
+      className={classes}
+      disabled={disabled || isLoading}
+      type={actionType}
+      {...props}
+    >
+      {content}
     </button>
   );
 }

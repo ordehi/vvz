@@ -68,4 +68,55 @@ export interface ButtonProps
   fullWidth?: boolean;
   'data-dark'?: boolean;
   'aria-theme'?: string;
+  actionType?: 'button' | 'submit' | 'reset';
+  href?: string;
+  target?: string;
+  rel?: string;
+}
+
+// Form-related types
+export type FieldType =
+  | 'text'
+  | 'email'
+  | 'textarea'
+  | 'tel'
+  | 'number'
+  | 'date';
+
+export interface FormField {
+  name: string;
+  type: FieldType;
+  placeholder?: string;
+  required?: boolean;
+  validation?: {
+    min?: number;
+    max?: number;
+    pattern?: string;
+    message?: string;
+  };
+}
+
+export interface ContactFormConfig {
+  title: string;
+  description?: string;
+  fields: FormField[];
+  submitButton: {
+    text: string;
+    variant: string;
+  };
+}
+
+export type FormDataType = Record<string, string | number | Date>;
+
+// New types for the form component props
+export interface ContactFormProps {
+  config: ContactFormConfig;
+  onSubmit?: (data: FormDataType) => Promise<void>;
+  className?: string;
+}
+
+export interface ToastProps {
+  message: string;
+  type: 'success' | 'error';
+  onClose: () => void;
 }
