@@ -74,17 +74,49 @@ export interface ButtonProps
   rel?: string;
 }
 
+// Form-related types
+export type FieldType =
+  | 'text'
+  | 'email'
+  | 'textarea'
+  | 'tel'
+  | 'number'
+  | 'date';
+
+export interface FormField {
+  name: string;
+  type: FieldType;
+  placeholder?: string;
+  required?: boolean;
+  validation?: {
+    min?: number;
+    max?: number;
+    pattern?: string;
+    message?: string;
+  };
+}
+
 export interface ContactFormConfig {
   title: string;
   description?: string;
-  fields: {
-    name: string;
-    type: 'text' | 'email' | 'textarea';
-    placeholder?: string;
-    required?: boolean;
-  }[];
+  fields: FormField[];
   submitButton: {
     text: string;
-    variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+    variant: string;
   };
+}
+
+export type FormDataType = Record<string, string | number | Date>;
+
+// New types for the form component props
+export interface ContactFormProps {
+  config: ContactFormConfig;
+  onSubmit?: (data: FormDataType) => Promise<void>;
+  className?: string;
+}
+
+export interface ToastProps {
+  message: string;
+  type: 'success' | 'error';
+  onClose: () => void;
 }
