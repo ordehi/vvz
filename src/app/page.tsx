@@ -1,6 +1,4 @@
 import Button from '@/components/Button';
-import ContactForm from '@/components/ContactForm';
-import { contactFormConfig } from '@/config/components/contactForm.client';
 import { FiArrowRight, FiPhone, FiMail } from 'react-icons/fi';
 
 export default function Home() {
@@ -57,11 +55,6 @@ export default function Home() {
           <Button variant='secondary' size='md' icon={<FiMail />}>
             Contact Sales
           </Button>
-        </div>
-
-        {/* Contact Form Section */}
-        <div className='mt-12 w-full max-w-2xl'>
-          <ContactForm config={contactFormConfig} />
         </div>
       </main>
     </div>
