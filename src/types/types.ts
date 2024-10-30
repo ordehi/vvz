@@ -68,6 +68,10 @@ export interface ButtonProps
   fullWidth?: boolean;
   'data-dark'?: boolean;
   'aria-theme'?: string;
+  actionType?: 'button' | 'submit' | 'reset';
+  href?: string;
+  target?: string;
+  rel?: string;
 }
 
 export interface ContactFormConfig {
