@@ -1,16 +1,12 @@
 import React from 'react';
-import { TestimonialsConfig, Testimonial } from '@/types/types';
 import Image from 'next/image';
+import {
+  TestimonialsProps,
+  TestimonialItemProps,
+  CardProps,
+} from '@/types/types';
 
-import { ReactNode } from 'react';
-
-const Card = ({
-  className = '',
-  children,
-}: {
-  className?: string;
-  children: ReactNode;
-}) => {
+const Card: React.FC<CardProps> = ({ className = '', children }) => {
   return (
     <div className={`bg-white rounded-lg shadow-md ${className}`}>
       {children}
@@ -18,12 +14,9 @@ const Card = ({
   );
 };
 
-const TestimonialItem = ({
+const TestimonialItem: React.FC<TestimonialItemProps> = ({
   testimonial,
   index,
-}: {
-  testimonial: Testimonial;
-  index: number;
 }) => {
   const isEven = index % 2 === 0;
 
@@ -110,7 +103,7 @@ const TestimonialItem = ({
   );
 };
 
-const Testimonials = ({ config }: { config: TestimonialsConfig }) => {
+export default function Testimonials({ config }: TestimonialsProps) {
   return (
     <div className='container mx-auto px-4 py-8'>
       <div className='max-w-3xl mx-auto space-y-8'>
@@ -124,6 +117,4 @@ const Testimonials = ({ config }: { config: TestimonialsConfig }) => {
       </div>
     </div>
   );
-};
-
-export default Testimonials;
+}

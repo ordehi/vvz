@@ -121,7 +121,7 @@ export interface ToastProps {
   onClose: () => void;
 }
 
-export type Testimonial = {
+type Testimonial = {
   image: string;
   text: string;
   additionalText?: string;
@@ -130,4 +130,18 @@ export type Testimonial = {
 export interface TestimonialsConfig {
   testimonials: Testimonial[];
   layout: 'default' | 'otherLayout'; // Placeholder for future layouts
+}
+
+export interface CardProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+export interface TestimonialItemProps {
+  testimonial: Testimonial;
+  index: number;
+}
+
+export interface TestimonialsProps {
+  config: TestimonialsConfig;
 }
