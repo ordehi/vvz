@@ -16,9 +16,13 @@ const config: Config = {
   },
   variants: {
     extend: {
-      display: ['peer-checked'],
+      transform: ['peer-checked'],
+      maxHeight: ['peer-checked'],
+      opacity: ['peer-checked'],
+      padding: ['peer-checked'],
     },
   },
   plugins: [],
 };
+
 export default config;
