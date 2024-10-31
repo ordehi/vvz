@@ -45,6 +45,7 @@ body {
   transition: max-height 0.5s ease-in-out;
 }
 
+/* Add this CSS to your stylesheet */
 .chevron-container {
   position: absolute;
   bottom: 4px;
@@ -55,6 +56,7 @@ body {
   justify-content: center;
   border-radius: 50%;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .chevron-container:hover {

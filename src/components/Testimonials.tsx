@@ -23,6 +23,7 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({
   index,
 }) => {
   const isEven = index % 2 === 0;
+  const hasAdditionalText = !!testimonial.additionalText;
 
   return (
     <div className='mb-8'>
@@ -35,7 +36,9 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({
 
         <label
           htmlFor={`toggle-${index}`}
-          className='group block cursor-pointer'
+          className={`group block ${
+            hasAdditionalText ? 'cursor-pointer' : 'cursor-default'
+          }`}
         >
           <Card
             className={`relative flex flex-col items-center md:flex-row ${
@@ -60,9 +63,10 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({
           </Card>
         </label>
 
-        {testimonial.additionalText && (
+        {hasAdditionalText && (
           <>
-            <div
+            <label
+              htmlFor={`toggle-${index}`}
               className={`chevron-container ${
                 isEven ? 'chevron-right' : 'chevron-left'
               }`}
@@ -88,7 +92,7 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({
                   d='M19 9l-7 7-7-7'
                 />
               </svg>
-            </div>
+            </label>
 
             <div className='peer-checked:block hidden'>
               <Card
