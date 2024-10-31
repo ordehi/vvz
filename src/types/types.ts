@@ -120,3 +120,14 @@ export interface ToastProps {
   type: 'success' | 'error';
   onClose: () => void;
 }
+
+export type Testimonial = {
+  image: string;
+  text: string;
+  additionalText?: string;
+};
+
+export interface TestimonialsConfig {
+  testimonials: Testimonial[];
+  layout: 'default' | 'otherLayout'; // Placeholder for future layouts
+}
