@@ -17,6 +17,7 @@ const config: Config = {
   variants: {
     extend: {
       transform: ['peer-checked'],
+      rotate: ['peer-checked'],
       maxHeight: ['peer-checked'],
       opacity: ['peer-checked'],
       padding: ['peer-checked'],
