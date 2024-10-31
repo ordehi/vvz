@@ -58,69 +58,54 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({
               <p className='text-gray-800'>{testimonial.text}</p>
             </div>
           </Card>
-
-          {/* Move the chevron inside the label but after the Card */}
-          <div
-            className={`
-              absolute
-              bottom-4
-              left-1/2
-              -translate-x-1/2
-              md:left-auto
-              ${isEven ? 'md:right-2' : 'md:left-2'}
-              w-8 h-8
-              flex
-              items-center
-              justify-center
-              rounded-full
-              hover:bg-gray-100
-              transition-colors
-              z-10
-            `}
-          >
-            <span className='sr-only'>
-              {!testimonial.additionalText
-                ? 'Read more about this testimonial'
-                : 'Show less content'}
-            </span>
-            <svg
-              className='w-5 h-5 text-gray-700 transition-transform duration-300 ease-in-out peer-checked:rotate-180'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M19 9l-7 7-7-7'
-              />
-            </svg>
-          </div>
         </label>
 
         {testimonial.additionalText && (
-          <Card
-            className={`
-              mt-2
-              transform
-              max-h-0
-              opacity-0
-              transition-all
-              duration-300
-              ease-out
-              peer-checked:max-h-screen
-              peer-checked:opacity-100
-              bg-gray-50
-              overflow-hidden
-              peer-checked:p-6
-              border-t-4
-              border-blue-500
-              shadow-lg
-            `}
-          >
-            <p className='text-gray-700'>{testimonial.additionalText}</p>
-          </Card>
+          <>
+            <div
+              className={`chevron-container ${
+                isEven ? 'chevron-right' : 'chevron-left'
+              }`}
+            >
+              <span className='sr-only'>
+                <span className='peer-checked:hidden'>
+                  Read more about this testimonial
+                </span>
+                <span className='hidden peer-checked:inline'>
+                  Show less content
+                </span>
+              </span>
+              <svg
+                className='chevron'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M19 9l-7 7-7-7'
+                />
+              </svg>
+            </div>
+
+            <div className='peer-checked:block hidden'>
+              <Card
+                className={`
+                  mt-2
+                  bg-gray-50
+                  overflow-hidden
+                  p-6
+                  border-t-4
+                  border-blue-500
+                  shadow-lg
+                `}
+              >
+                <p className='text-gray-700'>{testimonial.additionalText}</p>
+              </Card>
+            </div>
+          </>
         )}
       </div>
     </div>
