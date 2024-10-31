@@ -18,6 +18,12 @@ export const testimonialsConfig: TestimonialsConfig = {
       additionalText:
         'The customer support is fantastic and the product works as advertised.',
     },
+    {
+      image: 'https://i.pravatar.cc/150?img=4',
+      text: 'Extremely cool!',
+      additionalText:
+        'These people are at the top of their game. Paying anyone else is stealing from yourself.',
+    },
   ],
   layout: 'default',
 };
