@@ -110,7 +110,10 @@ const ContactForm: React.FC<ContactFormProps> = ({
   const getFieldComponent = (field: FormField) => {
     const commonProps = {
       name: field.name,
-      value: formData[field.name] || '',
+      value:
+        formData[field.name] instanceof Date
+          ? (formData[field.name] as Date).toISOString().split('T')[0]
+          : formData[field.name] || '',
       placeholder: field.placeholder,
       required: field.required,
       onChange: handleChange,
@@ -121,10 +124,18 @@ const ContactForm: React.FC<ContactFormProps> = ({
     };
 
     if (field.type === 'textarea') {
-      return <textarea {...commonProps} rows={4} />;
+      return (
+        <textarea {...commonProps} rows={4} value={String(commonProps.value)} />
+      );
     }
 
-    return <input type={field.type} {...commonProps} />;
+    return (
+      <input
+        type={field.type}
+        {...commonProps}
+        value={String(commonProps.value)}
+      />
+    );
   };
 
   return (
